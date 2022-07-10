@@ -11,18 +11,11 @@
  */
 class Solution {
 public:
-    int minDepth(TreeNode* r) {
-        if(r == NULL) 
+    int minDepth(TreeNode* root) {
+        if(root==NULL){ 
             return 0;
-        int ls = minDepth(r->left);
-        int rs = minDepth(r->right);
-        if(ls == 0 && rs == 0) 
-            return 1;
-        if(rs == 0) 
-            return ls+1;
-        if(ls == 0) 
-            return rs+1;
-        int x = min(ls,rs);
-        return  x + 1;
+        }
+        int l = minDepth(root->left), r = minDepth(root->right);
+        return 1 + (min(l, r) ? min(l, r) : max(l, r));
     }
 };
