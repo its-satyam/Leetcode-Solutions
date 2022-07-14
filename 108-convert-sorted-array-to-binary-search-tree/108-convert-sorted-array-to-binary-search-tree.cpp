@@ -11,22 +11,20 @@
  */
 class Solution {
 public:
-    TreeNode* sa(vector<int>&v,int i,int j)
-	{
-		if(i>j)
-		{
-			return NULL;
-		}
-
-		int m = i+(j-i)/2;
-		TreeNode *x = new TreeNode(v[m]);
-		x->left = sa(v,i,m-1);
-		x->right = sa(v,m+1,j);
-
-		return x;
-	}
-	TreeNode* sortedArrayToBST(vector<int>& v) {
-		return sa(v,0,v.size()-1);
-	}
-
+    TreeNode*  helper(vector<int>& nums, int l, int r)
+    {
+        if(l>r) 
+            return NULL;
+        int m = l + (r-l)/2;
+        TreeNode* le = helper(nums, l, m-1);
+        TreeNode* ri = helper(nums, m+1, r);
+        TreeNode* root = new TreeNode(nums[m]);
+        root->left = le;
+        root->right = ri;
+        return root;
+    }
+    TreeNode* sortedArrayToBST(vector<int>& nums) 
+    {
+        return helper(nums , 0 , nums.size()-1);
+    }
 };
