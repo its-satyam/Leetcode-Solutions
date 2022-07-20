@@ -1,51 +1,27 @@
 class Solution {
 public:
-     int bs(vector<int> &arr, int x){
-        int start = 0;
-        int end = arr.size()-1;
-        int ans = -1;
-        while (start <= end)
-        {
-            int mid = (start + end) / 2;
-
-            if (arr[mid] <= x)
-                start = mid + 1;
-            else
-            {
-                ans = mid;
-                end = mid - 1;
-            }
-        }
-        return ans==-1 ? ans : arr[ans];
-    }
-    
-
-    int numMatchingSubseq(string s, vector<string>& words) {
-	
-		// First , we are mapping index of characters of given string to respective characters
-        unordered_map<char,vector<int>> mp;
-        for(int i=0;i<s.length();i++){
-            mp[s[i]].push_back(i);
-        }
-          
-        int count = words.size(); // initializing ans 
-		
-        for(auto w : words){
-            int prev = -1;
-            for(int j=0;j<w.size();j++){
-				// Searching for strictly greater element than prev using binary search
-                int x = bs(mp[w[j]],prev);
-				// If strictly greater element not found, the current subsequence cannot be formed.
-                if(x == -1){
-                    count--;
-                    break;
+      int numMatchingSubseq(string s, vector<string>& words) {
+        int ans = 0;
+        int l1 = s.length(); //declare the length of main string
+        map<string,int> m;  // declare a map to store the results of subsquences already checked
+        for (auto word: words){
+            int l2 = word.length(); // declare length of current word
+            int j = 0;
+            if (m.find(word)==m.end()){ // Check for subsequence if current word not found in map
+               for (int i=0;i<l1 && j<l2;i++){   // if we reach end of current word, it means subsequence found. Hence no need to check further
+                    if (s[i]==word[j]){
+                        j++;
+                    }
                 }
-				// Else, updating the prev
-                else{
-                    prev = x;
-                }
+                ans+=(j==l2); // check if we reach end of the word 
+                m[word] = (j==l2);
             }
+            else{
+                ans+= m[word]; // If word is already checked before, no need to check again
+            }
+            
+            
         }
-        return count;
+        return ans;
     }
 };
