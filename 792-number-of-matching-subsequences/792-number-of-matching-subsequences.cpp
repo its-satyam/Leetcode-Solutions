@@ -1,25 +1,23 @@
 class Solution {
 public:
-        bool check(string s, string w) {
-		int i1 = 0, i2 = 0;
-		while(true) {
-			if(i2 == w.length()) 
-                return true;
-			int a = s.find(w[i2], i1);
-			if(a < 0) 
-                return false;
-			else {
-				i2 ++;
-				i1 = a + 1;
+    int numMatchingSubseq (string S, vector<string>& words) {
+        vector<vector<int>> alpha (26);
+		for (int i = 0; i < S.size (); ++i) alpha[S[i] - 'a'].push_back (i);
+		int res = 0;
+
+		for (const auto& word : words) {
+			int x = -1;
+			bool found = true;
+
+			for (char c : word) {
+				auto it = upper_bound (alpha[c - 'a'].begin (), alpha[c - 'a'].end (), x);
+				if (it == alpha[c - 'a'].end ()) found = false;
+				else x = *it;
 			}
+
+			if (found) res++;
 		}
-		return true;
-	}
-	int numMatchingSubseq(string s, vector<string>& words) {
-		int count = 0;
-		for(int i = 0; i < words.size(); i++) 
-            if(check(s, words[i]) == true) 
-                count ++;
-		return count;
+
+		return res;
     }
 };
