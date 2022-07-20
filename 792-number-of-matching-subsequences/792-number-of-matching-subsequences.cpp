@@ -1,23 +1,51 @@
 class Solution {
 public:
-    int numMatchingSubseq (string S, vector<string>& words) {
-        vector<vector<int>> alpha (26);
-		for (int i = 0; i < S.size (); ++i) alpha[S[i] - 'a'].push_back (i);
-		int res = 0;
+     int bs(vector<int> &arr, int x){
+        int start = 0;
+        int end = arr.size()-1;
+        int ans = -1;
+        while (start <= end)
+        {
+            int mid = (start + end) / 2;
 
-		for (const auto& word : words) {
-			int x = -1;
-			bool found = true;
+            if (arr[mid] <= x)
+                start = mid + 1;
+            else
+            {
+                ans = mid;
+                end = mid - 1;
+            }
+        }
+        return ans==-1 ? ans : arr[ans];
+    }
+    
 
-			for (char c : word) {
-				auto it = upper_bound (alpha[c - 'a'].begin (), alpha[c - 'a'].end (), x);
-				if (it == alpha[c - 'a'].end ()) found = false;
-				else x = *it;
-			}
-
-			if (found) res++;
-		}
-
-		return res;
+    int numMatchingSubseq(string s, vector<string>& words) {
+	
+		// First , we are mapping index of characters of given string to respective characters
+        unordered_map<char,vector<int>> mp;
+        for(int i=0;i<s.length();i++){
+            mp[s[i]].push_back(i);
+        }
+          
+        int count = words.size(); // initializing ans 
+		
+        for(auto w : words){
+            int prev = -1;
+            for(int j=0;j<w.size();j++){
+				// Searching for strictly greater element than prev using binary search
+                int x = bs(mp[w[j]],prev);
+				// If strictly greater element not found, the current subsequence cannot be formed.
+                if(x == -1){
+                    count--;
+                    break;
+                }
+				// Else, updating the prev
+                else{
+                    prev = x;
+                }
+            }
+        }
+        return count;
     }
 };
