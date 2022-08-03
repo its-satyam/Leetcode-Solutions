@@ -1,18 +1,21 @@
 class MyCalendar {
-    private:
-                vector<pair<int,int>> m;
 public:
+     map<int,int> times;
     MyCalendar() {
         
     }
-    
     bool book(int start, int end) {
-        for(auto it: m)
+       auto t=times.lower_bound(start);
+        cout<<(*t).first<<(*t).second;
+        if(t!=times.end() && (t->first == start || t->first < end))
+            return false;
+        if(t !=times.begin())
         {
-            if(it.first<end && start<it.second)
+            --t;
+            if(t->second > start)
                 return false;
         }
-        m.push_back({start,end});
+        times[start] = end;
         return true;
     }
 };
