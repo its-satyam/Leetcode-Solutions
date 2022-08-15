@@ -10,9 +10,9 @@ public:
         m['C']=100;
         m['D']=500;
         m['M']=1000;
-        for(int i=0;i<s.size();i++)
+        for(int i=0;i<s.length();i++)
         {
-            if(i!=s.size()-1 && m[s[i]]<m[s[i+1]])
+            if(i!=s.length()-1 && m[s[i]]<m[s[i+1]])
                 sum-=m[s[i]];
             else
                 sum+=m[s[i]];
