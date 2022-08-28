@@ -1,15 +1,21 @@
 class Solution {
 public:
     vector<vector<int>> diagonalSort(vector<vector<int>>& mat) {
-        for(int t=0;t<mat.size();t++)
+         int m=mat.size(), n=mat[0].size();
+        unordered_map<int, priority_queue<int, vector<int>,greater<int>>> mp; //create a priority queue to store the elements in descending order, and map it to [i-j] 
+        for(int i=0; i<m; i++)
         {
-            for(int i=1;i<mat.size();i++)
+            for(int j=0; j<n; j++)
             {
-                for(int j=1;j<mat[0].size();j++)
-                {
-                    if(mat[i][j]<mat[i-1][j-1])
-                        swap(mat[i][j],mat[i-1][j-1]);
-                }
+                mp[i-j].push(mat[i][j]); //push all the elements with index [i-j] into the queue
+            }
+        }
+        for(int i=0; i<m; i++)
+        {
+            for(int j=0; j<n; j++)
+            {
+                mat[i][j]= mp[i-j].top(); //change the values of the diagonals to the top value of the queue
+                mp[i-j].pop(); //delete the top element of the queue
             }
         }
         return mat;
