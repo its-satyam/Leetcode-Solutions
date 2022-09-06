@@ -6,7 +6,7 @@ public:
     }
     bool book(int start, int end) {
        auto t=times.lower_bound(start);
-        cout<<(*t).first<<(*t).second;
+        cout<<(*t).first<<" "<<(*t).second<<endl;
         if(t!=times.end() && (t->first == start || t->first < end))
             return false;
         if(t !=times.begin())
