@@ -1,19 +1,15 @@
 class Solution {
 public:
-    vector<int> replaceElements(vector<int>& arr) {
-        int n=arr.size();
-        vector<int> ans(n,-1);
-        int c=0;
-        for(int i=0;i<n-1;i++)
+    vector<int> replaceElements(vector<int>& a) {
+        int n = a.size();
+        if(n==1) return {-1};
+        int g = a[n-1];
+        vector<int> v(n,-1);
+        for(int i=n-2;i>=0;i--)
         {
-            c=0;
-            for(int j=i+1;j<n;j++)
-            {
-                 c=max(c,arr[j]);
-            }
-            ans[i]=c;
-            
+            v[i] = g;
+            g = max(g,a[i]);
         }
-        return ans;
+        return v;
     }
 };
