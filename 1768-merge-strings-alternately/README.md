@@ -3,7 +3,7 @@
 <p>Return <em>the merged string.</em></p>
 
 <p>&nbsp;</p>
-<p><strong>Example 1:</strong></p>
+<p><strong class="example">Example 1:</strong></p>
 
 <pre><strong>Input:</strong> word1 = "abc", word2 = "pqr"
 <strong>Output:</strong> "apbqcr"
@@ -13,7 +13,7 @@ word2:    p   q   r
 merged: a p b q c r
 </pre>
 
-<p><strong>Example 2:</strong></p>
+<p><strong class="example">Example 2:</strong></p>
 
 <pre><strong>Input:</strong> word1 = "ab", word2 = "pqrs"
 <strong>Output:</strong> "apbqrs"
@@ -23,7 +23,7 @@ word2:    p   q   r   s
 merged: a p b q   r   s
 </pre>
 
-<p><strong>Example 3:</strong></p>
+<p><strong class="example">Example 3:</strong></p>
 
 <pre><strong>Input:</strong> word1 = "abcd", word2 = "pq"
 <strong>Output:</strong> "apbqcd"
