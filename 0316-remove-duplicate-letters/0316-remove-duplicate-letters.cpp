@@ -4,9 +4,11 @@ public:
        vector<int> flag(26), lo(26);
         stack<char> st;
         
-        for(int i=0; i<str.size(); i++) lo[str[i] - 97] = i;
+        for(int i=0; i<str.size(); i++)
+            lo[str[i] - 97] = i;
         
-        for(int i=0; i<str.size(); i++) {
+        for(int i=0; i<str.size(); i++) 
+        {
             while(!st.empty() && str[i] < st.top() && !flag[str[i] - 97] && lo[st.top() - 97] > i) {
                 flag[st.top() - 97] = 0;
                 st.pop();
