@@ -1,13 +1,12 @@
 class Solution {
 public:
     int heightChecker(vector<int>& heights) {
-        vector<int> exp=heights;
+        vector<int> s = heights;
         sort(heights.begin(),heights.end());
-        int n=heights.size();
         int c=0;
-        for(int i=0;i<n;i++)
+        for(int i=0;i<heights.size();i++)
         {
-            if(exp[i]!=heights[i])
+            if(heights[i]!=s[i])
                 c++;
         }
         return c;
